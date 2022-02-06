@@ -1,0 +1,127 @@
+<app-navbar></app-navbar>
+
+<div class="container col-10 mt-5">
+  <ng-container *ngIf="team != ''">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h2>
+            <ng-container *ngIf="statics.icon == ''">
+              Completa el equipo con 6 Heroes para ver el atributo principal.
+            </ng-container>
+            <ng-container *ngIf="statics.icon != ''">
+              Equipo Completo - Atributo Principal <span class='{{statics.icon}}'
+                title={{statics.title}}></span>({{statics.title}})
+            </ng-container>
+          </h2>
+        </div>
+
+
+        <div class="col-md-4" *ngFor="let equipo of team">
+          <div class="card profile-card-3">
+            <div class="background-block" *ngIf="equipo.biography.alignment == 'good'">
+              <img src="../../../assets/img/good.jpg" alt="profile-sample1" class="background" />
+            </div>
+            <div class="background-block" *ngIf="equipo.biography.alignment == 'bad'">
+              <img src="../../../assets/img/bad.jpg" alt="profile-sample1" class="background" />
+            </div>
+            <div class="profile-thumb-block">
+              <img src={{equipo.image.url}} alt="profile-image" class="profile" />
+            </div>
+            <div class="card-content">
+              <h2>{{equipo.name}}
+                <span *ngIf="equipo.biography.alignment == 'good'" class="text-success">(Bueno)</span>
+                <span *ngIf="equipo.biography.alignment == 'bad'" class="text-danger">(Malo)</span>
+                <div class="mt-2">
+                  <span class="icon-weight" title="Peso"></span> {{equipo.appearance.weight[1]}}
+                  <span class="icon-height" title="Altura"></span> {{equipo.appearance.height[1]}}
+                </div>
+              </h2>
+              <div class="icon-block">
+                <h2>Habilidades</h2>
+                <span class="icon-strength" title="Fuerza"></span> {{equipo.powerstats.strength}}
+                <span class="icon-intelligence" title="Inteligencia"></span> {{equipo.powerstats.intelligence}}
+                <span class="icon-speed" title="Velocidad"></span> {{equipo.powerstats.speed}}
+              </div>
+              <div class="icon-block">
+                <span class="icon-durability" title="Durabilidad"></span> {{equipo.powerstats.durability}}
+                <span class="icon-power" title="Poder"></span> {{equipo.powerstats.power}}
+                <span class="icon-combat" title="Combate"></span> {{equipo.powerstats.combat}}
+              </div>
+            </div>
+            <p class="mt-3 w-100 float-left text-center"><button class="btn btn-danger ml-2"
+                (click)="delTeam(equipo.id)">Quitar</button></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  
+  <ng-container *ngIf="team == ''">
+    <div class="mb-4">
+      <span class="icon-oops" title="Seleccionar heroes para el equipo"></span>
+      <h2>Todavia no tiene heroes en su equipo. Accesa al buscador para agregarlos. </h2>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="team != ''">
+    <div>Acumulado Stats</div>
+    <div>
+      <ul>
+        <li>Inteligencia: {{statics.powerstats.intelligence}}</li>
+        <li>Fuerza: {{statics.powerstats.strength}}</li>
+        <li>Velocidad: {{statics.powerstats.speed}}</li>
+        <li>Durabilidad: {{statics.powerstats.durability}}</li>
+        <li>Poder: {{statics.powerstats.power}}</li>
+        <li>Combate: {{statics.powerstats.combat}}</li>
+
+      </ul>
+    </div>
+  </ng-container>
+
+
+
+</div>
+
+<!--Modal Busqueda-->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h5 id="offcanvasRightLabel">Busca los heroes que quieres en tu equipo.</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <form #busForm="ngForm" (ngSubmit)="buscar(busForm)">
+      <div class="input-group mt-3 mb-3 d-flex">
+        <span class="input-group-text col-3 mt-3">Filtro</span>
+        <input type="text" class="form-control col-6 mt-3" id="parametro" name="parametro" [(ngModel)]="parametro"
+          placeholder="Buscar" required>
+        <ng-container *ngIf="parametro != ''">
+          <button type="submit" class="btn btn-primary mt-3"><i class="fas fa-search"></i></button>
+        </ng-container>
+      </div>
+
+      <ng-container *ngIf="heroes != undefined">
+        <div class="card" *ngFor="let item of heroes">
+          <div class="card-header" *ngIf="heroes.length > 0 ">
+            <img class="card-img-top" src={{item.image.url}} alt="{{item.name}}">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{item.name}}</h5>
+            <p class="card-text">{{item.name}}</p>
+            <p class="card-text">
+              <button class="btn btn-success" (click)="addTeam(item.id)">Agregar</button>
+              <button class="btn btn-info ml-2" routerLink="heroes/{{item.id}}">Detalles</button>
+            </p>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="heroes == undefined">
+        <div class="col-8">La busqueda no encontro resultados.</div>
+      </ng-container>
+    </form>
+  </div>
+</div>
+
+
+
+<app-footer></app-footer>

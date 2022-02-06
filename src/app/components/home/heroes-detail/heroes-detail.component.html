@@ -1,0 +1,142 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="main-body">
+
+  
+        <div class="row gutters-sm mt-4"   *ngFor="let item of heroes">
+          <div class="col-md-4 mb-3">
+            <div class="card">
+              <div class="card-body">
+                <div class="d-flex flex-column align-items-center text-center">
+                  <img  src={{item.image.url}} alt="{{item.name}}" class="rounded-circle" width="150">
+                  <div class="mt-3">
+                    <h4>{{item.name}}</h4>
+                    <span *ngIf="item.biography.alignment == 'good'" class="text-success">(Bueno)</span>
+                    <span *ngIf="item.biography.alignment == 'bad'" class="text-danger">(Malo)</span>
+                    <p class="text-muted font-size-sm">{{item.work.base}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+           
+          </div>
+          <div class="col-md-8">
+            <div class="card mb-3">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Nombre</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    {{item.name}}
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Alias</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    {{item.biography.aliases}}
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Ocupacion</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    {{item.work.occupation}}
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Lugar de trabajo</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    {{item.work.base}}
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Peso</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    {{item.appearance.weight[1]}}
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Altura</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    {{item.appearance.height[1]}}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row gutters-sm">
+              <div class="col-sm-12 mb-3">
+                <div class="card h-100">
+                  <div class="card-body">
+                    <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Powerstats</i></h6>
+                    <small>Fuerza ({{strength}})</small>
+                    <div class="progress mb-3" style="height: 5px">
+                      <div class="progress-bar bg-primary" role="progressbar"  [ngStyle]="{'width.%': strength}" title="{{strength}}%"></div>
+                    </div>
+                    <small>Inteligencia ({{intelligence}})</small>
+                    <div class="progress mb-3" style="height: 5px">
+                      <div class="progress-bar bg-primary" role="progressbar" [ngStyle]="{'width.%': intelligence}" title="{{intelligence}}%"></div>
+                    </div>
+                    <small>Velocidad ({{speed}})</small>
+                    <div class="progress mb-3" style="height: 5px">
+                      <div class="progress-bar bg-primary" role="progressbar" [ngStyle]="{'width.%': speed}" title="{{speed}}%"></div>
+                    </div>
+                    <small>Duracion ({{durability}})</small>
+                    <div class="progress mb-3" style="height: 5px">
+                      <div class="progress-bar bg-primary" role="progressbar" [ngStyle]="{'width.%': durability}"  title="{{durability}}%"></div>
+                    </div>
+                    <small>Poder ({{power}})</small>
+                    <div class="progress mb-3" style="height: 5px">
+                      <div class="progress-bar bg-primary" role="progressbar" [ngStyle]="{'width.%': power}"  title="{{power}}%"></div>
+                    </div>
+                    <small>Combate ({{combat}})</small>
+                    <div class="progress mb-3" style="height: 5px">
+                      <div class="progress-bar bg-primary" role="progressbar" [ngStyle]="{'width.%': combat}"  title="{{combat}}%" ></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+          </div>
+        </div>
+
+      </div>
+  </div>
+ 
+  <div class="card-group col-10">
+    <div class="card" *ngFor="let item of heroes">
+      <img class="card-img-top" src={{item.image.url}} alt="{{item.name}}">
+      <div class="card-body">
+        <h5 class="card-title text-center">{{item.name}}</h5>
+        <p class="card-text">Combat: {{item.powerstats.combat}}</p>
+        <p class="card-text">Durability: {{item.powerstats.durability}}</p>
+        <p class="card-text">Inteligence: {{item.powerstats.intelligence}}</p>
+        <p class="card-text">Power: {{item.powerstats.power}}</p>
+        <p class="card-text">Speed: {{item.powerstats.speed}}</p>
+        <p class="card-text">Fuerza: {{item.powerstats.strength}}</p>
+        <p class="card-text">Altura: {{item.appearance.height[1]}}</p>
+        <p class="card-text">Peso: {{item.appearance.weight[1]}}</p>
+        <p class="card-text">Tipo: {{item.biography.alignment}}</p>
+      </div>
+    </div>
+  </div>
+  
+<app-footer></app-footer>
